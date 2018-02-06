@@ -1,9 +1,9 @@
-export class Group{
+export class Group {
 
-    //parameterized constructor for group class
+    // parameterized constructor for group class
     constructor(
         public title: string,
         public description: string,
-    ){}
+    ) {}
 }
 

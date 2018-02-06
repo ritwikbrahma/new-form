@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Group } from '../group';
+import { AddToJsonService } from '../add-to-json.service';
+
 
 
 @Component({
@@ -9,19 +11,21 @@ import { Group } from '../group';
 })
 export class GroupFormComponent implements OnInit {
 
-  model = new Group('','');
+  model = new Group('', '');
 
   submitted = false;
+  constructor(private add:AddToJsonService) { }
 
-  onSubmit()
-  {
+
+  onSubmit() {
+    this.add.putDescriptionTitle(this.model).subscribe();
     this.submitted = true;
   }
 
 
 
 
-  constructor() { }
+
 
   ngOnInit() {
   }

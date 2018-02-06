@@ -13,25 +13,23 @@ import {MatChipsModule} from '@angular/material/chips';
 })
 export class TagSearchComponent {
 
-//boolean variables
-  visible: boolean =  true;
-  selectable: boolean = true;
-  removable: boolean  = true;
-  addOnBlur: boolean  = true;
+// boolean variables
+  visible =  true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
 
-  //Enter, comma are separator keycodes, clicking on them, adds a new tag
+  // Enter, comma are separator keycodes, clicking on them, adds a new tag
   separatorKeysCodes = [ENTER, COMMA];
 
   employees = [
     { name: 'Ritwik' },
-    { name: 'Richi'},
-    { name: 'Priyanka'},
   ];
 
-//Add names 
+// Add names
  add(event: MatChipInputEvent): void {
-  let input = event.input;
-  let value = event.value;
+  const input = event.input;
+  const value = event.value;
 
   // Add our name
   if ((value || '').trim()) {
@@ -45,13 +43,11 @@ export class TagSearchComponent {
 }
 
 remove(employee: any): void {
-  let index = this.employees.indexOf(employee);
+  const index = this.employees.indexOf(employee);
 
   if (index >= 0) {
     this.employees.splice(index, 1);
   }
 }
 }
- 
 
-  

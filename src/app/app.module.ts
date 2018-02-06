@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import {MatChipsModule} from '@angular/material/chips';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { NgDragDropModule} from 'ng-drag-drop';
 
 import { AppComponent } from './app.component';
 import { TagSearchComponent } from './tag-search/tag-search.component';
@@ -11,7 +12,10 @@ import { MatSortModule} from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { GroupFormComponent } from './group-form/group-form.component';
-import { MatTableDataSource} from '@angular/material'; 
+import { MatTableDataSource} from '@angular/material';
+import { AddToJsonService } from './add-to-json.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -27,9 +31,12 @@ import { MatTableDataSource} from '@angular/material';
     MatSortModule,
     MatIconModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    NgDragDropModule.forRoot()
   ],
-  providers: [MatChip],
-  bootstrap: [AppComponent]
+  providers: [MatChip,AddToJsonService],
+  bootstrap: [AppComponent],
+  exports: [ BrowserModule,HttpClientModule,]
 })
 export class AppModule { }
