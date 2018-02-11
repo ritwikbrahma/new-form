@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MatChipInputEvent} from '@angular/material';
-import {ENTER, COMMA} from '@angular/cdk/keycodes';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipInputEvent } from '@angular/material';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { MatChipsModule } from '@angular/material/chips';
+import { Group } from '../group';
 
 /**
  * @title Chips with input
@@ -13,8 +14,8 @@ import {MatChipsModule} from '@angular/material/chips';
 })
 export class TagSearchComponent {
 
-// boolean variables
-  visible =  true;
+  // boolean variables
+  visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
@@ -23,31 +24,55 @@ export class TagSearchComponent {
   separatorKeysCodes = [ENTER, COMMA];
 
   employees = [
-    { name: 'Ritwik' },
   ];
 
-// Add names
- add(event: MatChipInputEvent): void {
-  const input = event.input;
-  const value = event.value;
+  // Add names
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+    if (this.removeDuplicates(this.employees, value)) {
 
-  // Add our name
-  if ((value || '').trim()) {
-    this.employees.push({ name: value.trim() });
+      // Add our name
+      if ((value || '').trim()) {
+        this.employees.push({ name: value.trim() });
+      }
+
+      // Reset the input value
+      if (input) {
+        input.value = '';
+      }
+    } else {
+      if (input) {
+        input.value = '';
+      }
+      alert("Tag Already Added");
+    }
+
   }
 
-  // Reset the input value
-  if (input) {
-    input.value = '';
-  }
-}
+  removeDuplicates(employees, name): any {
+    console.log("name: " + name);
 
-remove(employee: any): void {
-  const index = this.employees.indexOf(employee);
-
-  if (index >= 0) {
-    this.employees.splice(index, 1);
+    console.log(this.employees);
+    var flag: boolean = true;
+    for (var i = 0; i < employees.length; i++) {
+      if (employees[i].name.toLowerCase() == name.toLowerCase()) {
+        flag = false;
+        break;
+      }
+    }
+    console.log(flag);
+    return flag;
   }
-}
+
+
+
+  remove(employee: any): void {
+    const index = this.employees.indexOf(employee);
+
+    if (index >= 0) {
+      this.employees.splice(index, 1);
+    }
+  }
 }
 
